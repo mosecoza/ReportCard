@@ -48,15 +48,10 @@ public class ViewAllStudents extends ListActivity {
                                    long lo) {
         super.onListItemClick(listview, view, position, lo);
         long ed = position;
-        System.out.println("The other int is: "+position);
-        System.out.println("The other long is: "+lo);
-        System.out.println(studentsRepo.getStSurname(position));
-//
 
-
-//        Intent intent = new Intent(this, EditStudentInformation.class);
-//        intent.putExtra("id", p);
-//        startActivity(intent);
+        Intent intent = new Intent(this, EditStudentInformation.class);
+        intent.putExtra("id", position);
+        startActivity(intent);
     }
 }
 

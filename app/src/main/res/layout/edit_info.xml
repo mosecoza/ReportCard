@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout
     android:id="@+id/edit_info"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
@@ -31,6 +37,8 @@
         android:layout_height="wrap_content"
         android:background="#FFE0B2"
         android:elevation="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="2dp"
         android:orientation="vertical"
         android:padding="4dp">
 
@@ -39,7 +47,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginBottom="4dp"
-            android:text="@string/enter_your_id"
+            android:text="@string/enter_student_id"
             android:fontFamily="sans-serif-black"/>
 
 
@@ -73,28 +81,15 @@
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="4dp"
-        android:elevation="8dp">
 
-        <Button
-            android:id="@+id/btn_edit_update"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="sendUpdate"
-            android:text="@string/update_info"/>
-    </FrameLayout>
 
     <TableLayout
         android:id="@+id/tl_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="0dp"
+        android:padding="4dp"
+        android:layout_marginTop="2dp"
+        android:background="#FFF8E1"
         android:elevation="4dp">
 
         <TableRow
@@ -106,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:padding="2dp"
-                android:text="@string/enter_your_surname"
+                android:text="@string/enter_student_surname"
                 android:fontFamily="sans-serif-bold"
                 android:textStyle="bold"/>
 
@@ -152,7 +147,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/enter_your_id"
+                android:text="@string/enter_student_id"
                 android:fontFamily="sans-serif-bold"
                 android:textStyle="bold"/>
 
@@ -216,7 +211,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="et_edit_contact"
+            android:text="@string/enter_next_of_kin_contact"
             android:fontFamily="sans-serif-bold"
             android:textStyle="bold"/>
 
@@ -238,7 +233,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/test_3"
+                android:text="@string/Subject_3"
                 android:fontFamily="sans-serif-bold"
                 android:textStyle="bold"/>
 
@@ -261,7 +256,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="0.5"
-                android:text="@string/test_1"
+                android:text="@string/Subject_1"
                 android:fontFamily="sans-serif-bold"
                 android:textStyle="bold"/>
 
@@ -283,7 +278,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/test_2"
+                android:text="@string/Subject_2"
                 android:fontFamily="sans-serif-bold"
                 android:textStyle="bold"/>
 
@@ -299,5 +294,23 @@
 
 
     </TableLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
+        android:elevation="8dp">
+
+        <Button
+            android:id="@+id/btn_edit_update"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="sendUpdate"
+            android:text="@string/update_info"/>
+    </FrameLayout>
 
 </LinearLayout>
+</ScrollView>

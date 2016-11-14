@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">Report Card</string>
+    <string name="app_name">@string/report_card</string>
     <string name="enter_next_of_kin_contact">enter next of kin contact</string>
     <string name="number">number</string>
     <string name="add_student">Add Student</string>
     <string name="next_of_kin">next of kin</string>
     <string name="enter_next_of_kin">enter next of kin</string>
     <string name="address">address</string>
-    <string name="enter_your_id">enter your ID</string>
+    <string name="enter_student_id">enter student ID</string>
     <string name="name">name</string>
-    <string name="enter_your_name">enter your name</string>
-    <string name="enter_your_surname">enter your surname</string>
+    <string name="enter_student_name">enter student name</string>
+    <string name="enter_student_surname">enter student surname</string>
     <string name="register_new_student">Register new student</string>
     <string name="surname">surname</string>
     <string name="welcome_to_the_student_system">welcome to the student system</string>
@@ -20,34 +20,14 @@
     <string name="student_name">Student name</string>
     <string name="enter_here">enter here</string>
     <string name="edit_student_data">edit student data</string>
-    <string name="test_3">test 3</string>
-    <string name="test_2">test 2</string>
-    <string name="test_1">test 1</string>
+    <string name="Subject_3">Subject 3</string>
+    <string name="Subject_2">Subject 2</string>
+    <string name="Subject_1">Subject 1</string>
     <string name="edit_dialog_msg">" please check all required information is entered  "</string>
     <string name="dialog_retrieve_error">\n\n not all required information was retrieved from database \n\n</string>
     <string name="diaolg_add_success">\n\n    student is added     \n\n</string>
     <string name="update_succsess">\n\n Information successfully added \n\n</string>
-    <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="password">password</string>
-    <string name="sign_in">sign_in</string>
-    <string name="email">email</string>
-    <string name="enter_email_address">enter email address</string>
-    <string name="image">image</string>
-    <string name="title_activity_report">Report</string>
     <string name="report_card">Report Card</string>
-    <string name="lalalelalile_school_for_the_stupids">lalalelalile School for the stupids</string>
     <string name="listview_heading"># \t\t SURNAME \t\t NAME</string>
 </resources>

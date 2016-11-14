@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:paddingTop="24dp"
+    android:paddingBottom="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -36,7 +39,7 @@
 
         <Button
             android:id="@+id/btn_view"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick"
@@ -54,7 +57,7 @@
 
         <Button
             android:id="@+id/btn_edit"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick"
@@ -71,7 +74,7 @@
 
         <Button
             android:id="@+id/btn_add"
-            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick"

@@ -68,35 +68,36 @@ public class StudentsRepo {
         return   Answer;
     }
 
-    public long addNewStudent(Students students) {
+//    public long addNewStudent(Students students) {
+//
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        ContentValues cv = new ContentValues();
+//
+//        cv.put(Students.KEY_Surname,students.getSurname());
+//        cv.put(Students.KEY_Name,students.getName());
+//        cv.put(Students.KEY_Student_ID,students.getId());
+//        cv.put(Students.KEY_Address,students.getAddress());
+//        cv.put(Students.KEY_next_of_kin,students.getNext_of_kin());
+//        cv.put(Students.KEY_Contact,students.getContact());
+//        cv.put(Students.KEY_Subject_1, students.getSubject_1());
+//        cv.put(Students.KEY_Subject_2, students.getSubject_2());
+//        cv.put(Students.KEY_Subject_3, students.getSubject_3());
+//        return db.insert(Students.TABLE,null,cv);
+//    }
 
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        ContentValues cv = new ContentValues();
-
-        cv.put(Students.KEY_Surname,students.getSurname());
-        cv.put(Students.KEY_Name,students.getName());
-        cv.put(Students.KEY_Student_ID,students.getId());
-        cv.put(Students.KEY_Address,students.getAddress());
-        cv.put(Students.KEY_next_of_kin,students.getNext_of_kin());
-        cv.put(Students.KEY_Contact,students.getContact());
-        cv.put(Students.KEY_Subject_1, students.getSubject_1());
-        cv.put(Students.KEY_Subject_2, students.getSubject_2());
-        cv.put(Students.KEY_Subject_3, students.getSubject_3());
-        return db.insert(Students.TABLE,null,cv);
-    }
-
-    public String getStSurname(long ya) {
-        String[] columns = new String[] {Students.KEY_Surname};
-        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
-        Cursor c = db.query(Students.TABLE,columns,Students.KEY_ROW_ID+" = "+ ya,null,null, null,null);
-        if (c!=null){
-            c.moveToFirst();
-            String name = c.getString(1);
-            return name;
-        }
-
-        return null;
-    }
+//    public String getStSurname(String ya) {
+//        String[] columns = new String[] {Students.KEY_Surname};
+//        SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
+//        Cursor c = db.query(Students.TABLE,columns,Students.KEY_ROW_ID+" = "+ ya,null,null, null,null);
+//        if (c!=null){
+//            c.moveToFirst();
+//            String name = c.getString(1);
+//            c.close();
+//            return name;
+//        }
+//
+//        return null;
+//    }
 
     public boolean doesStudentExist(String long_id) {
         String[] columns = new String[] {Students.KEY_ROW_ID};
@@ -123,18 +124,6 @@ public class StudentsRepo {
         Cursor c = db.query(Students.TABLE,columns,Students.KEY_ROW_ID + " = " + students.getRow_id(),null,null, null,null);
 
         ArrayList<String> Answer = new ArrayList<>();
-        String ans = "";
-//
-//        int iRow = c.getColumnIndex(Students.KEY_ROW_ID);
-//        int iSurname = c.getColumnIndex(Students.KEY_Surname);
-//        int iName = c.getColumnIndex(Students.KEY_Name);
-//        int iId = c.getColumnIndex(Students.KEY_Student_ID);
-//        int iAddress = c.getColumnIndex(Students.KEY_Address);
-//        int iKin = c.getColumnIndex(Students.KEY_next_of_kin);
-//        int iContact = c.getColumnIndex(Students.KEY_Contact);
-//        int itest1 = c.getColumnIndex(Students.KEY_Subject_1);
-//        int itest2 = c.getColumnIndex(Students.KEY_Subject_2);
-//        int itest3 = c.getColumnIndex(Students.KEY_Subject_3);
 
         c.moveToFirst();
 

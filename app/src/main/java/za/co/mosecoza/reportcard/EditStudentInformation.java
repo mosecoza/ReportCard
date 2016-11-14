@@ -1,7 +1,6 @@
 package za.co.mosecoza.reportcard;
 
 import android.app.Dialog;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,6 +36,11 @@ public class EditStudentInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_info);
 
+        btn_update = (Button) findViewById(R.id.btn_edit_update);
+        tableLayout = (TableLayout) findViewById(R.id.tl_data);
+        tableLayout.setVisibility(View.GONE);
+        btn_update.setVisibility(View.GONE);
+
         et_searchId = (EditText) findViewById(R.id.et_editFind_id);
         bundle = getIntent().getExtras();
         int bunny;
@@ -50,24 +54,24 @@ public class EditStudentInformation extends AppCompatActivity {
         }
 
 
-        btn_update = (Button) findViewById(R.id.btn_edit_update);
-        tableLayout = (TableLayout) findViewById(R.id.tl_data);
+
 
 
     }
 
     //method to search for the ID
     public void search(View v) {
-
+        tableLayout.setVisibility(View.VISIBLE);
+        btn_update.setVisibility(View.VISIBLE);
         initialise();
 
         theId = et_searchId.getText().toString();
 
-        long_id = Long.parseLong(theId);
         databaseReportCard = new StudentsRepo();
 
         if (databaseReportCard.doesStudentExist(theId)) {
             getStudentDataFromDatabase();
+
             setEditextContent();
             Toast.makeText(this, " this student exists", Toast.LENGTH_LONG).show();
 
@@ -75,9 +79,8 @@ public class EditStudentInformation extends AppCompatActivity {
             Toast.makeText(this, " this student does not exists", Toast.LENGTH_LONG).show();
             return;
         }
-//        if (getStudentDataFromDatabase()) {
 
-//        }
+
     }
 
     //      method to send the update
@@ -114,6 +117,8 @@ public class EditStudentInformation extends AppCompatActivity {
                     tv.setText(R.string.update_succsess);
                     dialog.setContentView(tv);
                     dialog.show();
+                    tableLayout.setVisibility(View.GONE);
+                    btn_update.setVisibility(View.GONE);
                 }
             }
         }
@@ -147,7 +152,6 @@ public class EditStudentInformation extends AppCompatActivity {
 
     //a method to retrieve information about of a learner from database
     public Boolean getStudentDataFromDatabase() {
-        System.out.println("the index is: " + long_id);
         ArrayList<String> list = new ArrayList();
 
         StudentsRepo studentsRepo = new StudentsRepo();
@@ -200,7 +204,6 @@ public class EditStudentInformation extends AppCompatActivity {
 
     //a method to search a student if coming from view_info class
     public void searchFromBundle(int bunny) {
-        System.out.println("the bunny is: " + bunny);
 
         et_searchId.setText(String.format(String.valueOf(bunny)));
         search(et_searchId);
