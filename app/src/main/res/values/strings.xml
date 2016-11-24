@@ -29,5 +29,7 @@
     <string name="update_succsess">\n\n Information successfully added \n\n</string>
 
     <string name="report_card">Report Card</string>
-    <string name="listview_heading"># \t\t SURNAME \t\t NAME</string>
+    <string name="listview_heading">"    "# \t SURNAME \t\t NAME</string>
+    <string name="update_rowid">"DELETE FROM SQLITE_SEQUENCE WHERE NAME = "</string>
+    <string name="delete_student">delete student</string>
 </resources>

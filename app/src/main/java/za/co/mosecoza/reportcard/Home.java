@@ -34,7 +34,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.btn_edit:
-                Intent b = new Intent("android.intent.action.Edit_Info");
+                Intent b = new Intent(this, EditStudentInformation.class);
                 startActivity(b);
                 break;
 

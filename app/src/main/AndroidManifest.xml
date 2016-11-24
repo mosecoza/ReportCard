@@ -12,7 +12,8 @@
 
         <activity
             android:name=".Home"
-            android:label="Home">
+            android:label="Home"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,7 +22,8 @@
 
         <activity
             android:name=".RegisterStudents"
-            android:label="Register Student">
+            android:label="Register Student"
+            android:parentActivityName=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.Register" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -30,7 +32,8 @@
 
         <activity
             android:name=".ViewAllStudents"
-            android:label="Students List">
+            android:label="Students List"
+            android:parentActivityName=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.INFO" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -38,12 +41,9 @@
         </activity>
 
         <activity
+            android:parentActivityName=".Home"
             android:name=".EditStudentInformation"
             android:label="Edit Student Information">
-            <intent-filter>
-                <action android:name="android.intent.action.Edit_Info" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
     </application>

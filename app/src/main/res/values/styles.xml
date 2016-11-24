@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="alertDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#80CBC4</item>
+        <item name="colorPrimaryDark">#00796B</item>
+        <item name="colorAccent">#FFAB00</item>
+    </style>
+
 </resources>

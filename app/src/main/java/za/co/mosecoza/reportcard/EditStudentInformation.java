@@ -2,13 +2,13 @@ package za.co.mosecoza.reportcard;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class EditStudentInformation extends AppCompatActivity {
     EditText et_searchId, vSurname, vStudName, vSid, vSadres, vSkin, vScontact, vStest1, vStest2, vstest3;
 
     Button btn_update;
-    String sSnam, sNam, sId, sAdres, sKin, sCont, theId, sSub1, sSub2, sSub3;
+    String sSnam, sNam, sId, sAdres, sKin, sCont, theId, sSub1, sSub2, sSub3, error;
 
     TableLayout tableLayout;
 
@@ -28,6 +28,7 @@ public class EditStudentInformation extends AppCompatActivity {
     long long_id;
     Bundle bundle;
     int getRowIdIfUpdateSuccess;
+    boolean didItWork;
     StudentsRepo studentsRepo;
     Students students;
 
@@ -42,21 +43,22 @@ public class EditStudentInformation extends AppCompatActivity {
         btn_update.setVisibility(View.GONE);
 
         et_searchId = (EditText) findViewById(R.id.et_editFind_id);
-        bundle = getIntent().getExtras();
-        int bunny;
-        if (bundle==null) {
-            return;
-        } else {
+        try {
+            bundle = getIntent().getExtras();
+            int bunny;
+
             bunny = bundle.getInt("id");
-            System.out.println("the bunny is: " + bunny);
             searchFromBundle(bunny);
+        }catch (Exception e) {
+            didItWork = false;
+            error = e.toString();
+            showMessage("Check if Bundle is null","Oh sorry, press back");
 
+        } finally {
+            if (didItWork) {
+                showMessage("Check if Bundle is null","Student was successfully added");
+            }
         }
-
-
-
-
-
     }
 
     //method to search for the ID
@@ -69,18 +71,19 @@ public class EditStudentInformation extends AppCompatActivity {
 
         databaseReportCard = new StudentsRepo();
 
-        if (databaseReportCard.doesStudentExist(theId)) {
+        try{
             getStudentDataFromDatabase();
-
-            setEditextContent();
-            Toast.makeText(this, " this student exists", Toast.LENGTH_LONG).show();
-
-        } else {
-            Toast.makeText(this, " this student does not exists", Toast.LENGTH_LONG).show();
-            return;
+        }catch (Exception e){
+            error = e.toString();
+            didItWork = false;
+        }finally {
+            didItWork=true;
+            if(didItWork){
+                showMessage("Editext information status","editext successfully filled");}
+            else
+                showMessage("Editext information status"," no data was found for: "+theId);
         }
-
-
+        setEditextContent();
     }
 
     //      method to send the update
@@ -103,20 +106,17 @@ public class EditStudentInformation extends AppCompatActivity {
                 students.setSubject_1(sSub1);
                 students.setSubject_2(sSub2);
                 students.setSubject_3(sSub3);
+
                 getRowIdIfUpdateSuccess = studentsRepo.updateStudentData(students);
                 DatabaseManager.getInstance().closeDatabase();
+
             } catch (Exception e) {
                 didItWork = false;
-                String error = e.toString();
-            } finally {
+                error = e.toString();
+            } finally {didItWork = true;
                 if (didItWork) {
 
-                    dialog = new Dialog(this);
-                    dialog.setTitle(" Did it work ");
-                    TextView tv = new TextView(this);
-                    tv.setText(R.string.update_succsess);
-                    dialog.setContentView(tv);
-                    dialog.show();
+                    showMessage("---------student update----------","student updated");
                     tableLayout.setVisibility(View.GONE);
                     btn_update.setVisibility(View.GONE);
                 }
@@ -136,17 +136,14 @@ public class EditStudentInformation extends AppCompatActivity {
         sSub2 = vStest2.getText().toString();
         sSub3 = vstest3.getText().toString();
 
-        if (sSnam.isEmpty() || sNam.isEmpty() || sId.isEmpty()
-                || sAdres.isEmpty() || sCont.isEmpty() || sSub1.isEmpty()
-                || sSub2.isEmpty() || sSub3.isEmpty()) {
+        if (sSnam.isEmpty() && sNam.isEmpty() && sId.isEmpty()
+                && sAdres.isEmpty() && sCont.isEmpty() && sSub1.isEmpty()
+                && sSub2.isEmpty() && sSub3.isEmpty()) {
 
-            dialog = new Dialog(getApplicationContext());
-            dialog.setTitle(" error message  ");
-            tv.setText(R.string.edit_dialog_msg);
-            dialog.setContentView(tv);
-            dialog.show();
+           showMessage("    Get information from editext     ","no all data is inserted");
             return false;
         }
+        showMessage("    Get information from editext     ","successfully read from editext");
         return true;
     }
 
@@ -158,7 +155,21 @@ public class EditStudentInformation extends AppCompatActivity {
 
 
         if (studentsRepo.getStudentToEditInfo(theId)!=null){
-            list = studentsRepo.getStudentToEditInfo(theId);
+            try{
+                studentsRepo.doesStudentExist(theId);
+                list=studentsRepo.getStudentToEditInfo(theId);
+            }catch (Exception e){
+                didItWork = false;
+                String error = e.toString();
+
+            }finally {
+                didItWork=true;
+                if(didItWork){
+
+                    showMessage("    check if student exist    ","This student exist");}
+                else
+                    showMessage("    check if student exist    ","student does not exist");
+            }
         sSnam = list.get(1);
         sNam = list.get(2);
         sId = list.get(3);
@@ -171,6 +182,7 @@ public class EditStudentInformation extends AppCompatActivity {
             return true;
         }
         else{
+            finish();
             return false;
         }
 
@@ -208,4 +220,24 @@ public class EditStudentInformation extends AppCompatActivity {
         et_searchId.setText(String.format(String.valueOf(bunny)));
         search(et_searchId);
     }
+    public void DeleteStudent(View view){
+        StudentsRepo studentsRepo = new StudentsRepo();
+
+
+        if (studentsRepo.getStudentToEditInfo(theId)!=null){
+            int s =studentsRepo.deleteStudent(theId);
+            if (s>0){
+                showMessage("     Student Delete      ", "The student was deleted");
+            initialise();}
+            else {showMessage("     Student Delete      ","The student was not deleted");}
+    }
+    }
+
+    public void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.alertDialogTheme);
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.show();
+    }
+
 }
