@@ -12,19 +12,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
+    tools:context="za.co.admin.sql_thing.activity_register_students"
     >
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:elevation="8dp"
-        android:gravity="center_horizontal"
-        android:text="@string/register_new_student"
-        android:textAllCaps="true"
-        android:fontFamily="serif"
-        android:textStyle="bold"
-        android:textSize="24sp"/>
 
     <TableLayout
         android:id="@+id/tl_register_students"

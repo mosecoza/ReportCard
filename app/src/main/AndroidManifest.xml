@@ -21,26 +21,6 @@
         </activity>
 
         <activity
-            android:name=".RegisterStudents"
-            android:label="Register Student"
-            android:parentActivityName=".Home">
-            <intent-filter>
-                <action android:name="android.intent.action.Register" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".ViewAllStudents"
-            android:label="Students List"
-            android:parentActivityName=".Home">
-            <intent-filter>
-                <action android:name="android.intent.action.INFO" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:parentActivityName=".Home"
             android:name=".EditStudentInformation"
             android:label="Edit Student Information">

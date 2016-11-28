@@ -1,26 +1,34 @@
 package za.co.mosecoza.reportcard;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class EditStudentInformation extends AppCompatActivity {
+import static za.co.mosecoza.reportcard.R.id.btn_search;
+
+public class EditStudentInformation extends Fragment implements View.OnClickListener {
 
     //initialising variables
     EditText et_searchId, vSurname, vStudName, vSid, vSadres, vSkin, vScontact, vStest1, vStest2, vstest3;
 
     Button btn_update;
+    ImageView imageView;
     String sSnam, sNam, sId, sAdres, sKin, sCont, theId, sSub1, sSub2, sSub3, error;
 
     TableLayout tableLayout;
+    Context context= App.getContext();
 
     TextView tv;
     StudentsRepo databaseReportCard;
@@ -29,43 +37,56 @@ public class EditStudentInformation extends AppCompatActivity {
     Bundle bundle;
     int getRowIdIfUpdateSuccess;
     boolean didItWork;
-    StudentsRepo studentsRepo;
-    Students students;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.edit_info);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.edit_info,container,false);
 
-        btn_update = (Button) findViewById(R.id.btn_edit_update);
-        tableLayout = (TableLayout) findViewById(R.id.tl_data);
+        btn_update = (Button) rootView.findViewById(R.id.btn_edit_update);
+        et_searchId = (EditText) rootView.findViewById(R.id.et_editFind_id);
+        imageView = (ImageView) rootView.findViewById(btn_search);
+        btn_update.setOnClickListener(this);
+        imageView.setOnClickListener(this);
+        tableLayout = (TableLayout) rootView.findViewById(R.id.tl_data);
         tableLayout.setVisibility(View.GONE);
         btn_update.setVisibility(View.GONE);
+        vSadres = (EditText)rootView.findViewById(R.id.et_edit_address);
+        vScontact = (EditText) rootView.findViewById(R.id.et_edit_contact);
+        vSid = (EditText) rootView.findViewById(R.id.et_edit_id);
+        vSkin = (EditText) rootView.findViewById(R.id.et_edit_kin);
+        vStudName = (EditText) rootView.findViewById(R.id.et_edit_name);
+        vSurname = (EditText) rootView.findViewById(R.id.et_edit_surname);
+        vStest1 = (EditText) rootView.findViewById(R.id.et_edit_test1);
+        vStest2 = (EditText) rootView.findViewById(R.id.et_edit_test2);
+        vstest3 = (EditText) rootView.findViewById(R.id.et_edit_test3);
 
-        et_searchId = (EditText) findViewById(R.id.et_editFind_id);
-        try {
-            bundle = getIntent().getExtras();
-            int bunny;
-
-            bunny = bundle.getInt("id");
-            searchFromBundle(bunny);
-        }catch (Exception e) {
-            didItWork = false;
-            error = e.toString();
-            showMessage("Check if Bundle is null","Oh sorry, press back");
-
-        } finally {
-            if (didItWork) {
-                showMessage("Check if Bundle is null","Student was successfully added");
-            }
-        }
+//        et_searchId = (EditText) rootView.findViewById(R.id.et_editFind_id);
+//        try {
+//
+//
+//            int bunny;
+//
+//            bunny = bundle.getInt("id");
+//            searchFromBundle(bunny);
+//        }catch (Exception e) {
+//            didItWork = false;
+//            error = e.toString();
+//            showMessage("Check if Bundle is null","Oh sorry, press back");
+//
+//        } finally {
+//            if (didItWork) {
+//                showMessage("Check if Bundle is null","Student was successfully added");
+//            }
+//        }
+        return rootView;
     }
+    public EditStudentInformation(){}
 
     //method to search for the ID
     public void search(View v) {
         tableLayout.setVisibility(View.VISIBLE);
         btn_update.setVisibility(View.VISIBLE);
-        initialise();
 
         theId = et_searchId.getText().toString();
 
@@ -174,6 +195,7 @@ public class EditStudentInformation extends AppCompatActivity {
         sNam = list.get(2);
         sId = list.get(3);
         sAdres = list.get(4);
+            System.out.println("++++++++++_________"+ list.get(4));
         sKin = list.get(5);
         sCont = list.get(6);
         sSub1 = list.get(7);
@@ -182,7 +204,6 @@ public class EditStudentInformation extends AppCompatActivity {
             return true;
         }
         else{
-            finish();
             return false;
         }
 
@@ -201,25 +222,13 @@ public class EditStudentInformation extends AppCompatActivity {
         vstest3.setText(sSub3);
     }
 
-    //to initialise variables and views in the data form
-    public void initialise() {
-        vSadres = (EditText) findViewById(R.id.et_edit_address);
-        vScontact = (EditText) findViewById(R.id.et_edit_contact);
-        vSid = (EditText) findViewById(R.id.et_edit_id);
-        vSkin = (EditText) findViewById(R.id.et_edit_kin);
-        vStudName = (EditText) findViewById(R.id.et_edit_name);
-        vSurname = (EditText) findViewById(R.id.et_edit_surname);
-        vStest1 = (EditText) findViewById(R.id.et_edit_test1);
-        vStest2 = (EditText) findViewById(R.id.et_edit_test2);
-        vstest3 = (EditText) findViewById(R.id.et_edit_test3);
-    }
 
-    //a method to search a student if coming from view_info class
-    public void searchFromBundle(int bunny) {
-
-        et_searchId.setText(String.format(String.valueOf(bunny)));
-        search(et_searchId);
-    }
+//    //a method to search a student if coming from view_info class
+//    public void searchFromBundle(int bunny) {
+//
+//        et_searchId.setText(String.format(String.valueOf(bunny)));
+//        search(et_searchId);
+//    }
     public void DeleteStudent(View view){
         StudentsRepo studentsRepo = new StudentsRepo();
 
@@ -228,16 +237,84 @@ public class EditStudentInformation extends AppCompatActivity {
             int s =studentsRepo.deleteStudent(theId);
             if (s>0){
                 showMessage("     Student Delete      ", "The student was deleted");
-            initialise();}
+            }
             else {showMessage("     Student Delete      ","The student was not deleted");}
     }
     }
 
     public void showMessage(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.alertDialogTheme);
+       AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(message);
         builder.setTitle(title);
         builder.show();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_search:
+
+                tableLayout.setVisibility(View.VISIBLE);
+                btn_update.setVisibility(View.VISIBLE);
+                theId = et_searchId.getText().toString();
+
+
+                databaseReportCard = new StudentsRepo();
+
+                try{
+                    getStudentDataFromDatabase();
+                }catch (Exception e){
+                    error = e.toString();
+                    didItWork = false;
+                }finally {
+                    didItWork=true;
+                    if(didItWork){
+                        showMessage("Editext information status","editext successfully filled");}
+                    else
+                        showMessage("Editext information status"," no data was found for: "+theId);
+                }
+                setEditextContent();
+
+                break;
+
+            case R.id.btn_edit_update:
+
+                boolean didItWork = true;
+                if (readEditText()) {
+
+                    long_id = Long.parseLong(theId);
+
+                    try {
+
+                        StudentsRepo studentsRepo = new StudentsRepo();
+                        Students students = new Students();
+                        students.setRow_id(theId);
+                        students.setSurname(sSnam);
+                        students.setName(sNam);
+                        students.setId(sId);
+                        students.setNext_of_kin(sKin);
+                        students.setContact(sCont);
+                        students.setSubject_1(sSub1);
+                        students.setSubject_2(sSub2);
+                        students.setSubject_3(sSub3);
+
+                        getRowIdIfUpdateSuccess = studentsRepo.updateStudentData(students);
+                        DatabaseManager.getInstance().closeDatabase();
+
+                    } catch (Exception e) {
+                        didItWork = false;
+                        error = e.toString();
+                    } finally {didItWork = true;
+                        if (didItWork) {
+
+                            showMessage("---------student update----------","student updated");
+                            tableLayout.setVisibility(View.GONE);
+                            btn_update.setVisibility(View.GONE);
+                        }
+                    }
+                }
+
+                break;
+        }
+    }
 }

@@ -1,46 +1,62 @@
 package za.co.mosecoza.reportcard;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 
-public class RegisterStudents extends AppCompatActivity implements View.OnClickListener {
+/**
+ * Created by Admin on 2016-11-25.
+ */
+
+public class RegisterFragment extends Fragment implements View.OnClickListener {
+
+    public RegisterFragment(){}
+
     Button btnAddStudent;
-    EditText sqlSurname, sqlName, sqlID_num, sqlAddress, sqlKin, sqlContact, sqlTest1, sqlTest2, sqlTest3;
     int getRowIdIfAddIsSuccess;
-    TableLayout registerTable;
     String surname, name, id,address, kin,contact,test1,test2,test3;
-
+    EditText sqlSurname, sqlName, sqlID_num, sqlAddress, sqlKin, sqlContact, sqlTest1, sqlTest2, sqlTest3;
+    TableLayout registerTable;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_students);
-        initialise();
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_register_students,container,false);
 
-    private void initialise() {
-        registerTable = (TableLayout) findViewById(R.id.tl_register_students);
-        sqlSurname = (EditText) findViewById(R.id.et_surname);
-        sqlName = (EditText) findViewById(R.id.et_name);
-        sqlID_num = (EditText) findViewById(R.id.et_id);
-        sqlAddress = (EditText) findViewById(R.id.et_address);
-        sqlKin = (EditText) findViewById(R.id.et_kin);
-        sqlTest1 = (EditText) findViewById(R.id.et_test_1);
-        sqlTest2 = (EditText) findViewById(R.id.et_test_2);
-        sqlTest3 = (EditText) findViewById(R.id.et_test_3);
-        sqlContact = (EditText) findViewById(R.id.et_contact);
-        btnAddStudent = (Button) findViewById(R.id.btn_add);
+
+        btnAddStudent = (Button) rootView.findViewById(R.id.btn_add);
+        registerTable =(TableLayout) rootView.findViewById(R.id.tl_register_students);
+        sqlSurname = (EditText) rootView.findViewById(R.id.et_surname);
+        sqlName = (EditText) rootView.findViewById(R.id.et_name);
+        sqlID_num = (EditText) rootView.findViewById(R.id.et_id);
+        sqlAddress = (EditText)rootView.findViewById(R.id.et_address);
+        sqlKin = (EditText)rootView.findViewById(R.id.et_kin);
+        sqlTest1 = (EditText)rootView.findViewById(R.id.et_test_1);
+        sqlTest2 = (EditText)rootView.findViewById(R.id.et_test_2);
+        sqlTest3 = (EditText)rootView.findViewById(R.id.et_test_3);
+        sqlContact = (EditText)rootView.findViewById(R.id.et_contact);
+        btnAddStudent = (Button)rootView.findViewById(R.id.btn_add);
 
         btnAddStudent.setOnClickListener(this);
 
+
+        return rootView;
+    }
+
+
+    public void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.show();
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         Students students = new Students();
 
         boolean didItWork = true;
@@ -73,24 +89,7 @@ public class RegisterStudents extends AppCompatActivity implements View.OnClickL
 
         }
     }
-    public void showMessage(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.alertDialogTheme);
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.show();
-    }
-    public void clearEditText(){
-        sqlSurname.setText(null);
-        sqlName.setText(null);
-        sqlID_num.setText(null);
-        sqlAddress.setText(null);
-        sqlKin.setText(null);
-        sqlTest1.setText(null);
-        sqlTest2.setText(null);
-        sqlTest3.setText(null);
-        sqlContact.setText(null);
-        btnAddStudent.setVisibility(View.GONE);
-    }
+
     //a method to read  information of a learner from the editText so to send queries to database
     public boolean readEditText() {
         surname = sqlSurname.getText().toString();
@@ -110,5 +109,16 @@ public class RegisterStudents extends AppCompatActivity implements View.OnClickL
         }
         return false;
     }
-
+    public void clearEditText(){
+        sqlSurname.setText(null);
+        sqlName.setText(null);
+        sqlID_num.setText(null);
+        sqlAddress.setText(null);
+        sqlKin.setText(null);
+        sqlTest1.setText(null);
+        sqlTest2.setText(null);
+        sqlTest3.setText(null);
+        sqlContact.setText(null);
+        btnAddStudent.setVisibility(View.GONE);
+    }
 }

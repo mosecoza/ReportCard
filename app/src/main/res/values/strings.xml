@@ -32,4 +32,7 @@
     <string name="listview_heading">"    "# \t SURNAME \t\t NAME</string>
     <string name="update_rowid">"DELETE FROM SQLITE_SEQUENCE WHERE NAME = "</string>
     <string name="delete_student">delete student</string>
+    <string name="page_add_student">Add Student</string>
+    <string name="page_view_all">View All</string>
+    <string name="page_edit_info">Update Information</string>
 </resources>

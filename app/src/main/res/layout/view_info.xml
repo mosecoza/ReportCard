@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/images_one"
-        android:requiresFadingEdge="vertical">
-
-    </android.support.v7.widget.AppCompatImageView>
 <ListView
     android:id="@android:id/list"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,8 +14,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="75dp"
-    android:paddingStart="50dp"
-    android:paddingEnd="50dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     tools:context="za.co.admin.sql_thing.view_info">
 
 </ListView>
